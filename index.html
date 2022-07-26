@@ -1534,7 +1534,7 @@ RStudio with Session -&gt; Set Working Directory</p>
 #loading required packages - use install.packages() to install these packages on your R
 library(tidyverse)
 library(palmerpenguins)
-library(gt)
+library(gt) #gt for showing tables in html
 library(data.table)
 library(WDI)
 library(broom)</code></pre>
@@ -1556,22 +1556,22 @@ library(broom)</code></pre>
 <pre class="r"><code>x1 &lt;- sample(1:10, 100, replace = T) </code></pre>
 <p>Inspect objects</p>
 <pre class="r"><code>head(x1)</code></pre>
-<pre><code>## [1] 10  9  9  3  3  1</code></pre>
+<pre><code>## [1]  3  7  1  9  4 10</code></pre>
 <pre class="r"><code>tail(x1)</code></pre>
-<pre><code>## [1] 4 2 5 8 4 6</code></pre>
+<pre><code>## [1]  9  5  1  9  9 10</code></pre>
 <p>Subset elements within an object, in this case from the vector
 <code>x1</code></p>
 <pre class="r"><code>x1[3] </code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 1</code></pre>
 <pre class="r"><code>x1[2:3]</code></pre>
-<pre><code>## [1] 9 9</code></pre>
+<pre><code>## [1] 7 1</code></pre>
 <p>Combine subsetting and assigning to assign new values</p>
 <pre class="r"><code>#assign new values to subsetted data
 x1[3] &lt;- 8
 
 #inspecting to check that we did asssign the third element of x1 as 8
 head(x1)</code></pre>
-<pre><code>## [1] 10  9  8  3  3  1</code></pre>
+<pre><code>## [1]  3  7  8  9  4 10</code></pre>
 <p>What did these lines of code do? First we sampled 100 numbers from 1
 to 10 with replacement with the <code>sample</code> function, and
 assigned it as a vector <code>x1</code>. We then inspected the start and
@@ -1618,9 +1618,9 @@ for (i in 1:100){
 
 #inspecting
 head(x1)</code></pre>
-<pre><code>## [1] 10  9  8  3  3  1</code></pre>
+<pre><code>## [1]  3  7  8  9  4 10</code></pre>
 <pre class="r"><code>head(x2)</code></pre>
-<pre><code>## [1] 11 10  9  4  4  2</code></pre>
+<pre><code>## [1]  4  8  9 10  5 11</code></pre>
 <p>In this loop, we first created an empty vector <code>x2</code> , and
 created a <code>for</code> loop, saying for each element <code>i</code>
 (you don’t have to name it <code>i</code> necessarily, could be any
@@ -1704,7 +1704,7 @@ good measure! Notice that a <code>list</code> object can take elements
 of different types and dimensions - you can inspect it in RStudio.</p>
 <p>First, let’s take a look at the structure of <code>tas</code> with
 the <code>str</code> function:</p>
-<pre class="r"><code>str(tas)</code></pre>
+<pre class="r"><code>str(tas) #str for structure</code></pre>
 <pre><code>## List of 4
 ##  $ :List of 2
 ##   ..$ name  : chr &quot;   rEgGrEssIon coNnoisSeuR &quot;
@@ -1714,11 +1714,11 @@ the <code>str</code> function:</p>
 ##   ..$ fields: chr &quot;PE, MM&quot;
 ##  $ : Named chr &quot;tIm the beAver&quot;
 ##   ..- attr(*, &quot;names&quot;)= chr &quot;name&quot;
-##  $ : num [1:10] -1.917 0.255 -1.381 0.409 1.339 ...</code></pre>
+##  $ : num [1:10] -0.247 -1.41 -0.81 -1.621 0.5 ...</code></pre>
 <p>We only want the first 2 elements of the list! Since we want the
 output to still be a list, we subset it with single square brackets
 <code>[</code> . This will became important later.</p>
-<pre class="r"><code>tas_2 &lt;- tas[1:2]
+<pre class="r"><code>tas_2 &lt;- tas[1:2] #subsetting first 2 elements of tas, return as list with []
 class(tas_2)</code></pre>
 <pre><code>## [1] &quot;list&quot;</code></pre>
 <p>But we still need to clean the data! This is where
@@ -1735,7 +1735,7 @@ in the cleaning step.</p>
 ta_names_clean &lt;- lapply(tas_2, function(x){
   ta_names &lt;- tolower(x$name) #converting names to lowercase
   ta_names_trim &lt;- str_trim(ta_names) #trimming whitespace
-  ta_names_trim
+  ta_names_trim #returning trimmed characters
 })
 
 #replacing with cleaned names
@@ -1765,12 +1765,12 @@ using <code>purrr</code> with more succinct (and more readable) code.
 <code>purrr</code> is part of the <code>tidyverse</code> and is a
 package for functional programming — you can read more about it <a href="https://purrr.tidyverse.org/index.html">here</a>. No need to worry
 about this for Quant 1!</p>
-<pre class="r"><code>#Writing helper function to combine tolower and trim
+<pre class="r"><code>#Writing helper function to combine tolower and trim. The pipe %&gt;% operator means take this output and feed it into the next step. 
 f_helper &lt;- function(x){
   x %&gt;% tolower() %&gt;% 
     str_trim()
 }
-#modifying nested lists using modify family from purrr
+#modifying nested lists using modify family from purrr. Check out the documentation!
 tas_2 %&gt;% modify_depth(1, ~modify_at(., &#39;name&#39;, f_helper))</code></pre>
 <pre><code>## [[1]]
 ## [[1]]$name
@@ -1802,12 +1802,12 @@ Don’t worry about the pipe operator <code>%&gt;%</code> just yet, we’ll
 cover it later.</p>
 <pre class="r"><code>df &lt;- rbindlist(tas_2)
 gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
-<div id="vitzziirwi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jvkxzaexjt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vitzziirwi .gt_table {
+#jvkxzaexjt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1832,7 +1832,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_heading {
+#jvkxzaexjt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1844,7 +1844,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_title {
+#jvkxzaexjt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1856,7 +1856,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-width: 0;
 }
 
-#vitzziirwi .gt_subtitle {
+#jvkxzaexjt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1868,13 +1868,13 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-top-width: 0;
 }
 
-#vitzziirwi .gt_bottom_border {
+#jvkxzaexjt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_col_headings {
+#jvkxzaexjt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1889,7 +1889,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_col_heading {
+#jvkxzaexjt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1909,7 +1909,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   overflow-x: hidden;
 }
 
-#vitzziirwi .gt_column_spanner_outer {
+#jvkxzaexjt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1921,15 +1921,15 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 4px;
 }
 
-#vitzziirwi .gt_column_spanner_outer:first-child {
+#jvkxzaexjt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vitzziirwi .gt_column_spanner_outer:last-child {
+#jvkxzaexjt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vitzziirwi .gt_column_spanner {
+#jvkxzaexjt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1941,7 +1941,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   width: 100%;
 }
 
-#vitzziirwi .gt_group_heading {
+#jvkxzaexjt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,7 +1966,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: middle;
 }
 
-#vitzziirwi .gt_empty_group_heading {
+#jvkxzaexjt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1981,15 +1981,15 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: middle;
 }
 
-#vitzziirwi .gt_from_md > :first-child {
+#jvkxzaexjt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vitzziirwi .gt_from_md > :last-child {
+#jvkxzaexjt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vitzziirwi .gt_row {
+#jvkxzaexjt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2008,7 +2008,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   overflow-x: hidden;
 }
 
-#vitzziirwi .gt_stub {
+#jvkxzaexjt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2021,7 +2021,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#vitzziirwi .gt_stub_row_group {
+#jvkxzaexjt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2035,11 +2035,11 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: top;
 }
 
-#vitzziirwi .gt_row_group_first td {
+#jvkxzaexjt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vitzziirwi .gt_summary_row {
+#jvkxzaexjt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2049,16 +2049,16 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#vitzziirwi .gt_first_summary_row {
+#jvkxzaexjt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_first_summary_row.thick {
+#jvkxzaexjt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vitzziirwi .gt_last_summary_row {
+#jvkxzaexjt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2068,7 +2068,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_grand_summary_row {
+#jvkxzaexjt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2078,7 +2078,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#vitzziirwi .gt_first_grand_summary_row {
+#jvkxzaexjt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2088,11 +2088,11 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_striped {
+#jvkxzaexjt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vitzziirwi .gt_table_body {
+#jvkxzaexjt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2101,7 +2101,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_footnotes {
+#jvkxzaexjt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2115,7 +2115,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_footnote {
+#jvkxzaexjt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2124,7 +2124,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#vitzziirwi .gt_sourcenotes {
+#jvkxzaexjt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2138,7 +2138,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vitzziirwi .gt_sourcenote {
+#jvkxzaexjt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2146,36 +2146,36 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#vitzziirwi .gt_left {
+#jvkxzaexjt .gt_left {
   text-align: left;
 }
 
-#vitzziirwi .gt_center {
+#jvkxzaexjt .gt_center {
   text-align: center;
 }
 
-#vitzziirwi .gt_right {
+#jvkxzaexjt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vitzziirwi .gt_font_normal {
+#jvkxzaexjt .gt_font_normal {
   font-weight: normal;
 }
 
-#vitzziirwi .gt_font_bold {
+#jvkxzaexjt .gt_font_bold {
   font-weight: bold;
 }
 
-#vitzziirwi .gt_font_italic {
+#jvkxzaexjt .gt_font_italic {
   font-style: italic;
 }
 
-#vitzziirwi .gt_super {
+#jvkxzaexjt .gt_super {
   font-size: 65%;
 }
 
-#vitzziirwi .gt_two_val_uncert {
+#jvkxzaexjt .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -2184,31 +2184,31 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   margin-left: 0.1em;
 }
 
-#vitzziirwi .gt_footnote_marks {
+#jvkxzaexjt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#vitzziirwi .gt_asterisk {
+#jvkxzaexjt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vitzziirwi .gt_slash_mark {
+#jvkxzaexjt .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#vitzziirwi .gt_fraction_numerator {
+#jvkxzaexjt .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#vitzziirwi .gt_fraction_denominator {
+#jvkxzaexjt .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2385,8 +2385,9 @@ multiple columns. We encourage you to check out the documentation and
 examples <a href="https://dplyr.tidyverse.org/">here</a>.</p>
 <p>A simple example for <code>select</code> and <code>mutate</code>,
 where we get the ratio of bill length to depth:</p>
-<pre class="r"><code>df_ratio &lt;- penguins %&gt;% select(species, bill_length_mm, bill_depth_mm) %&gt;% 
-  mutate(l_d_ratio = bill_length_mm/bill_depth_mm) %&gt;% 
+<pre class="r"><code>df_ratio &lt;- penguins %&gt;% 
+  select(species, bill_length_mm, bill_depth_mm) %&gt;% #selecting species and bill covars
+  mutate(l_d_ratio = bill_length_mm/bill_depth_mm) %&gt;% #creating new ratio var
   drop_na()
 head(df_ratio)</code></pre>
 <pre><code>## # A tibble: 6 × 4
@@ -2415,12 +2416,12 @@ head(df_ratio)</code></pre>
 <pre class="r"><code>df_out &lt;- penguins %&gt;% filter(sex == &#39;male&#39;) %&gt;% group_by(island) %&gt;% 
   summarize(across(.cols = starts_with(&#39;bill&#39;), .fns = list(mean = mean, sd = sd), .names = &quot;{.fn}_{.col}&quot;))
 gt(df_out)</code></pre>
-<div id="nupkbshiyp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="orrmloudsw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#nupkbshiyp .gt_table {
+#orrmloudsw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2445,7 +2446,7 @@ gt(df_out)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_heading {
+#orrmloudsw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2457,7 +2458,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_title {
+#orrmloudsw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2469,7 +2470,7 @@ gt(df_out)</code></pre>
   border-bottom-width: 0;
 }
 
-#nupkbshiyp .gt_subtitle {
+#orrmloudsw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2481,13 +2482,13 @@ gt(df_out)</code></pre>
   border-top-width: 0;
 }
 
-#nupkbshiyp .gt_bottom_border {
+#orrmloudsw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_col_headings {
+#orrmloudsw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2502,7 +2503,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_col_heading {
+#orrmloudsw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2522,7 +2523,7 @@ gt(df_out)</code></pre>
   overflow-x: hidden;
 }
 
-#nupkbshiyp .gt_column_spanner_outer {
+#orrmloudsw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2534,15 +2535,15 @@ gt(df_out)</code></pre>
   padding-right: 4px;
 }
 
-#nupkbshiyp .gt_column_spanner_outer:first-child {
+#orrmloudsw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nupkbshiyp .gt_column_spanner_outer:last-child {
+#orrmloudsw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nupkbshiyp .gt_column_spanner {
+#orrmloudsw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2554,7 +2555,7 @@ gt(df_out)</code></pre>
   width: 100%;
 }
 
-#nupkbshiyp .gt_group_heading {
+#orrmloudsw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2579,7 +2580,7 @@ gt(df_out)</code></pre>
   vertical-align: middle;
 }
 
-#nupkbshiyp .gt_empty_group_heading {
+#orrmloudsw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2594,15 +2595,15 @@ gt(df_out)</code></pre>
   vertical-align: middle;
 }
 
-#nupkbshiyp .gt_from_md > :first-child {
+#orrmloudsw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nupkbshiyp .gt_from_md > :last-child {
+#orrmloudsw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nupkbshiyp .gt_row {
+#orrmloudsw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2621,7 +2622,7 @@ gt(df_out)</code></pre>
   overflow-x: hidden;
 }
 
-#nupkbshiyp .gt_stub {
+#orrmloudsw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2634,7 +2635,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#nupkbshiyp .gt_stub_row_group {
+#orrmloudsw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2648,11 +2649,11 @@ gt(df_out)</code></pre>
   vertical-align: top;
 }
 
-#nupkbshiyp .gt_row_group_first td {
+#orrmloudsw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nupkbshiyp .gt_summary_row {
+#orrmloudsw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2662,16 +2663,16 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#nupkbshiyp .gt_first_summary_row {
+#orrmloudsw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_first_summary_row.thick {
+#orrmloudsw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nupkbshiyp .gt_last_summary_row {
+#orrmloudsw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2681,7 +2682,7 @@ gt(df_out)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_grand_summary_row {
+#orrmloudsw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2691,7 +2692,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#nupkbshiyp .gt_first_grand_summary_row {
+#orrmloudsw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2701,11 +2702,11 @@ gt(df_out)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_striped {
+#orrmloudsw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nupkbshiyp .gt_table_body {
+#orrmloudsw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2714,7 +2715,7 @@ gt(df_out)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_footnotes {
+#orrmloudsw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2728,7 +2729,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_footnote {
+#orrmloudsw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2737,7 +2738,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#nupkbshiyp .gt_sourcenotes {
+#orrmloudsw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2751,7 +2752,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nupkbshiyp .gt_sourcenote {
+#orrmloudsw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2759,36 +2760,36 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#nupkbshiyp .gt_left {
+#orrmloudsw .gt_left {
   text-align: left;
 }
 
-#nupkbshiyp .gt_center {
+#orrmloudsw .gt_center {
   text-align: center;
 }
 
-#nupkbshiyp .gt_right {
+#orrmloudsw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nupkbshiyp .gt_font_normal {
+#orrmloudsw .gt_font_normal {
   font-weight: normal;
 }
 
-#nupkbshiyp .gt_font_bold {
+#orrmloudsw .gt_font_bold {
   font-weight: bold;
 }
 
-#nupkbshiyp .gt_font_italic {
+#orrmloudsw .gt_font_italic {
   font-style: italic;
 }
 
-#nupkbshiyp .gt_super {
+#orrmloudsw .gt_super {
   font-size: 65%;
 }
 
-#nupkbshiyp .gt_two_val_uncert {
+#orrmloudsw .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -2797,31 +2798,31 @@ gt(df_out)</code></pre>
   margin-left: 0.1em;
 }
 
-#nupkbshiyp .gt_footnote_marks {
+#orrmloudsw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#nupkbshiyp .gt_asterisk {
+#orrmloudsw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nupkbshiyp .gt_slash_mark {
+#orrmloudsw .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#nupkbshiyp .gt_fraction_numerator {
+#orrmloudsw .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#nupkbshiyp .gt_fraction_denominator {
+#orrmloudsw .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2958,7 +2959,8 @@ Linear regression seeks to recover the relationship between variables.
 You’ll notice that there is a positive relationship between flipper and
 beak length. <code>lm</code> is the function for linear regression, and
 the tilde <code>~</code> sign separates the left and right hand sides of
-a model formula:</p>
+a model formula. We often use the <code>summary</code> function to look
+at model results:</p>
 <pre class="r"><code>mod_penguin &lt;- lm(flipper_length_mm ~ bill_length_mm, data = penguins)
 summary(mod_penguin)</code></pre>
 <pre><code>## 
