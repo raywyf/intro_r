@@ -1556,22 +1556,22 @@ library(broom)</code></pre>
 <pre class="r"><code>x1 &lt;- sample(1:10, 100, replace = T) </code></pre>
 <p>Inspect objects</p>
 <pre class="r"><code>head(x1)</code></pre>
-<pre><code>## [1]  3  7  1  9  4 10</code></pre>
+<pre><code>## [1]  5  4  1 10  4  6</code></pre>
 <pre class="r"><code>tail(x1)</code></pre>
-<pre><code>## [1]  9  5  1  9  9 10</code></pre>
+<pre><code>## [1] 1 5 8 4 8 4</code></pre>
 <p>Subset elements within an object, in this case from the vector
 <code>x1</code></p>
 <pre class="r"><code>x1[3] </code></pre>
 <pre><code>## [1] 1</code></pre>
 <pre class="r"><code>x1[2:3]</code></pre>
-<pre><code>## [1] 7 1</code></pre>
+<pre><code>## [1] 4 1</code></pre>
 <p>Combine subsetting and assigning to assign new values</p>
 <pre class="r"><code>#assign new values to subsetted data
 x1[3] &lt;- 8
 
 #inspecting to check that we did asssign the third element of x1 as 8
 head(x1)</code></pre>
-<pre><code>## [1]  3  7  8  9  4 10</code></pre>
+<pre><code>## [1]  5  4  8 10  4  6</code></pre>
 <p>What did these lines of code do? First we sampled 100 numbers from 1
 to 10 with replacement with the <code>sample</code> function, and
 assigned it as a vector <code>x1</code>. We then inspected the start and
@@ -1618,9 +1618,9 @@ for (i in 1:100){
 
 #inspecting
 head(x1)</code></pre>
-<pre><code>## [1]  3  7  8  9  4 10</code></pre>
+<pre><code>## [1]  5  4  8 10  4  6</code></pre>
 <pre class="r"><code>head(x2)</code></pre>
-<pre><code>## [1]  4  8  9 10  5 11</code></pre>
+<pre><code>## [1]  6  5  9 11  5  7</code></pre>
 <p>In this loop, we first created an empty vector <code>x2</code> , and
 created a <code>for</code> loop, saying for each element <code>i</code>
 (you don’t have to name it <code>i</code> necessarily, could be any
@@ -1714,7 +1714,7 @@ the <code>str</code> function:</p>
 ##   ..$ fields: chr &quot;PE, MM&quot;
 ##  $ : Named chr &quot;tIm the beAver&quot;
 ##   ..- attr(*, &quot;names&quot;)= chr &quot;name&quot;
-##  $ : num [1:10] -0.247 -1.41 -0.81 -1.621 0.5 ...</code></pre>
+##  $ : num [1:10] 0.0313 1.3583 0.9011 -1.8845 -0.0295 ...</code></pre>
 <p>We only want the first 2 elements of the list! Since we want the
 output to still be a list, we subset it with single square brackets
 <code>[</code> . This will became important later.</p>
@@ -1802,12 +1802,12 @@ Don’t worry about the pipe operator <code>%&gt;%</code> just yet, we’ll
 cover it later.</p>
 <pre class="r"><code>df &lt;- rbindlist(tas_2)
 gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
-<div id="jvkxzaexjt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ccqswkqavw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jvkxzaexjt .gt_table {
+#ccqswkqavw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1832,7 +1832,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_heading {
+#ccqswkqavw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1844,7 +1844,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_title {
+#ccqswkqavw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1856,7 +1856,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-width: 0;
 }
 
-#jvkxzaexjt .gt_subtitle {
+#ccqswkqavw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1868,13 +1868,13 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-top-width: 0;
 }
 
-#jvkxzaexjt .gt_bottom_border {
+#ccqswkqavw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_col_headings {
+#ccqswkqavw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1889,7 +1889,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_col_heading {
+#ccqswkqavw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1909,7 +1909,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   overflow-x: hidden;
 }
 
-#jvkxzaexjt .gt_column_spanner_outer {
+#ccqswkqavw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1921,15 +1921,15 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 4px;
 }
 
-#jvkxzaexjt .gt_column_spanner_outer:first-child {
+#ccqswkqavw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jvkxzaexjt .gt_column_spanner_outer:last-child {
+#ccqswkqavw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jvkxzaexjt .gt_column_spanner {
+#ccqswkqavw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1941,7 +1941,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   width: 100%;
 }
 
-#jvkxzaexjt .gt_group_heading {
+#ccqswkqavw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,7 +1966,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: middle;
 }
 
-#jvkxzaexjt .gt_empty_group_heading {
+#ccqswkqavw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1981,15 +1981,15 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: middle;
 }
 
-#jvkxzaexjt .gt_from_md > :first-child {
+#ccqswkqavw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jvkxzaexjt .gt_from_md > :last-child {
+#ccqswkqavw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jvkxzaexjt .gt_row {
+#ccqswkqavw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2008,7 +2008,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   overflow-x: hidden;
 }
 
-#jvkxzaexjt .gt_stub {
+#ccqswkqavw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2021,7 +2021,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#jvkxzaexjt .gt_stub_row_group {
+#ccqswkqavw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2035,11 +2035,11 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   vertical-align: top;
 }
 
-#jvkxzaexjt .gt_row_group_first td {
+#ccqswkqavw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jvkxzaexjt .gt_summary_row {
+#ccqswkqavw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2049,16 +2049,16 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#jvkxzaexjt .gt_first_summary_row {
+#ccqswkqavw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_first_summary_row.thick {
+#ccqswkqavw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jvkxzaexjt .gt_last_summary_row {
+#ccqswkqavw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2068,7 +2068,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_grand_summary_row {
+#ccqswkqavw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2078,7 +2078,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#jvkxzaexjt .gt_first_grand_summary_row {
+#ccqswkqavw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2088,11 +2088,11 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_striped {
+#ccqswkqavw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jvkxzaexjt .gt_table_body {
+#ccqswkqavw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2101,7 +2101,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_footnotes {
+#ccqswkqavw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2115,7 +2115,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_footnote {
+#ccqswkqavw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2124,7 +2124,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#jvkxzaexjt .gt_sourcenotes {
+#ccqswkqavw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2138,7 +2138,7 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jvkxzaexjt .gt_sourcenote {
+#ccqswkqavw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2146,36 +2146,36 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   padding-right: 5px;
 }
 
-#jvkxzaexjt .gt_left {
+#ccqswkqavw .gt_left {
   text-align: left;
 }
 
-#jvkxzaexjt .gt_center {
+#ccqswkqavw .gt_center {
   text-align: center;
 }
 
-#jvkxzaexjt .gt_right {
+#ccqswkqavw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jvkxzaexjt .gt_font_normal {
+#ccqswkqavw .gt_font_normal {
   font-weight: normal;
 }
 
-#jvkxzaexjt .gt_font_bold {
+#ccqswkqavw .gt_font_bold {
   font-weight: bold;
 }
 
-#jvkxzaexjt .gt_font_italic {
+#ccqswkqavw .gt_font_italic {
   font-style: italic;
 }
 
-#jvkxzaexjt .gt_super {
+#ccqswkqavw .gt_super {
   font-size: 65%;
 }
 
-#jvkxzaexjt .gt_two_val_uncert {
+#ccqswkqavw .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -2184,31 +2184,31 @@ gt(df) %&gt;% tab_header(title = &#39;TA info&#39;)</code></pre>
   margin-left: 0.1em;
 }
 
-#jvkxzaexjt .gt_footnote_marks {
+#ccqswkqavw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jvkxzaexjt .gt_asterisk {
+#ccqswkqavw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jvkxzaexjt .gt_slash_mark {
+#ccqswkqavw .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#jvkxzaexjt .gt_fraction_numerator {
+#ccqswkqavw .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#jvkxzaexjt .gt_fraction_denominator {
+#ccqswkqavw .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2416,12 +2416,12 @@ head(df_ratio)</code></pre>
 <pre class="r"><code>df_out &lt;- penguins %&gt;% filter(sex == &#39;male&#39;) %&gt;% group_by(island) %&gt;% 
   summarize(across(.cols = starts_with(&#39;bill&#39;), .fns = list(mean = mean, sd = sd), .names = &quot;{.fn}_{.col}&quot;))
 gt(df_out)</code></pre>
-<div id="orrmloudsw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="czvrxgsnbl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#orrmloudsw .gt_table {
+#czvrxgsnbl .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2446,7 +2446,7 @@ gt(df_out)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_heading {
+#czvrxgsnbl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2458,7 +2458,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_title {
+#czvrxgsnbl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2470,7 +2470,7 @@ gt(df_out)</code></pre>
   border-bottom-width: 0;
 }
 
-#orrmloudsw .gt_subtitle {
+#czvrxgsnbl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2482,13 +2482,13 @@ gt(df_out)</code></pre>
   border-top-width: 0;
 }
 
-#orrmloudsw .gt_bottom_border {
+#czvrxgsnbl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_col_headings {
+#czvrxgsnbl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2503,7 +2503,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_col_heading {
+#czvrxgsnbl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2523,7 +2523,7 @@ gt(df_out)</code></pre>
   overflow-x: hidden;
 }
 
-#orrmloudsw .gt_column_spanner_outer {
+#czvrxgsnbl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2535,15 +2535,15 @@ gt(df_out)</code></pre>
   padding-right: 4px;
 }
 
-#orrmloudsw .gt_column_spanner_outer:first-child {
+#czvrxgsnbl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#orrmloudsw .gt_column_spanner_outer:last-child {
+#czvrxgsnbl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#orrmloudsw .gt_column_spanner {
+#czvrxgsnbl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2555,7 +2555,7 @@ gt(df_out)</code></pre>
   width: 100%;
 }
 
-#orrmloudsw .gt_group_heading {
+#czvrxgsnbl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2580,7 +2580,7 @@ gt(df_out)</code></pre>
   vertical-align: middle;
 }
 
-#orrmloudsw .gt_empty_group_heading {
+#czvrxgsnbl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2595,15 +2595,15 @@ gt(df_out)</code></pre>
   vertical-align: middle;
 }
 
-#orrmloudsw .gt_from_md > :first-child {
+#czvrxgsnbl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#orrmloudsw .gt_from_md > :last-child {
+#czvrxgsnbl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#orrmloudsw .gt_row {
+#czvrxgsnbl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2622,7 +2622,7 @@ gt(df_out)</code></pre>
   overflow-x: hidden;
 }
 
-#orrmloudsw .gt_stub {
+#czvrxgsnbl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2635,7 +2635,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#orrmloudsw .gt_stub_row_group {
+#czvrxgsnbl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2649,11 +2649,11 @@ gt(df_out)</code></pre>
   vertical-align: top;
 }
 
-#orrmloudsw .gt_row_group_first td {
+#czvrxgsnbl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#orrmloudsw .gt_summary_row {
+#czvrxgsnbl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2663,16 +2663,16 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#orrmloudsw .gt_first_summary_row {
+#czvrxgsnbl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_first_summary_row.thick {
+#czvrxgsnbl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#orrmloudsw .gt_last_summary_row {
+#czvrxgsnbl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2682,7 +2682,7 @@ gt(df_out)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_grand_summary_row {
+#czvrxgsnbl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2692,7 +2692,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#orrmloudsw .gt_first_grand_summary_row {
+#czvrxgsnbl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2702,11 +2702,11 @@ gt(df_out)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_striped {
+#czvrxgsnbl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#orrmloudsw .gt_table_body {
+#czvrxgsnbl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2715,7 +2715,7 @@ gt(df_out)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_footnotes {
+#czvrxgsnbl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2729,7 +2729,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_footnote {
+#czvrxgsnbl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2738,7 +2738,7 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#orrmloudsw .gt_sourcenotes {
+#czvrxgsnbl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2752,7 +2752,7 @@ gt(df_out)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#orrmloudsw .gt_sourcenote {
+#czvrxgsnbl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2760,36 +2760,36 @@ gt(df_out)</code></pre>
   padding-right: 5px;
 }
 
-#orrmloudsw .gt_left {
+#czvrxgsnbl .gt_left {
   text-align: left;
 }
 
-#orrmloudsw .gt_center {
+#czvrxgsnbl .gt_center {
   text-align: center;
 }
 
-#orrmloudsw .gt_right {
+#czvrxgsnbl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#orrmloudsw .gt_font_normal {
+#czvrxgsnbl .gt_font_normal {
   font-weight: normal;
 }
 
-#orrmloudsw .gt_font_bold {
+#czvrxgsnbl .gt_font_bold {
   font-weight: bold;
 }
 
-#orrmloudsw .gt_font_italic {
+#czvrxgsnbl .gt_font_italic {
   font-style: italic;
 }
 
-#orrmloudsw .gt_super {
+#czvrxgsnbl .gt_super {
   font-size: 65%;
 }
 
-#orrmloudsw .gt_two_val_uncert {
+#czvrxgsnbl .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -2798,31 +2798,31 @@ gt(df_out)</code></pre>
   margin-left: 0.1em;
 }
 
-#orrmloudsw .gt_footnote_marks {
+#czvrxgsnbl .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#orrmloudsw .gt_asterisk {
+#czvrxgsnbl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#orrmloudsw .gt_slash_mark {
+#czvrxgsnbl .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#orrmloudsw .gt_fraction_numerator {
+#czvrxgsnbl .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#orrmloudsw .gt_fraction_denominator {
+#czvrxgsnbl .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2940,8 +2940,9 @@ objects, e.g. what type of graph. You can combine these components with
 <p>It is also useful to check out <code>facet_wrap</code>,
 <code>facet_grid</code> for generating multiple plots based on some
 variable (usually a categorical one, e.g., plot across different
-species). For some great examples of <code>ggplot</code> graphics, check
-out the <code>palmerpenguins</code> package <a href="https://allisonhorst.github.io/palmerpenguins/articles/examples.html">website</a>.</p>
+species). For some great examples of <code>ggplot</code> graphics
+(including the plot above!), check out the <code>palmerpenguins</code>
+package <a href="https://allisonhorst.github.io/palmerpenguins/articles/examples.html">website</a>.</p>
 <p>You can also use base R for plotting, although as you can see, the
 code is a bit clunkier:</p>
 <pre class="r"><code>plot(x = penguins$flipper_length_mm,
